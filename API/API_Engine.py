@@ -29,8 +29,10 @@ class AyxPlugin:
 
         # Custom properties
         self.Method = "Method"
+
+#defines field type and sizes as a variable in downstream processes
         self.data_type = Sdk.FieldType.v_wstring
-        self.data_size = 20
+        self.data_size = 20000
         self.URL = "URL"
         self.status = "Status"
         #self.data_type = Sdk.FieldType.v_wstring
@@ -152,7 +154,7 @@ class IncomingInterface:
         #record_info_out.add_field(self.parent.out_name, self.parent.out_type, self.parent.out_size)
 
         record_info_out.add_field(self.parent.status,self.parent.data_type, self.parent.data_size)
-        record_info_out.add_field(self.parent.response,self.parent.data_type_double)
+        record_info_out.add_field(self.parent.response,self.parent.data_type, self.parent.data_size)
 
 
         # Lets the downstream tools know what the outgoing record metadata will look like, based on record_info_out.
@@ -177,10 +179,11 @@ class IncomingInterface:
 
         self.parent.status = record_info_out[record_info_out.get_field_num(self.parent.status)]
         self.parent.response = record_info_out[record_info_out.get_field_num(self.parent.response)]
+        self.parent.method = record_info_out[record_info_out.get_field_num(self.parent.method)]
+        self.parent.header = record_info_out[record_info_out.get_field_num(self.parent.header)]		
+        self.parent.body = record_info_out[record_info_out.get_field_num(self.parent.body)]
+        self.parent.url = record_info_out[record_info_out.get_field_num(self.parent.url)]
 
-
-        # Grab the index of our input field in the record, so we don't have to do a string lookup on every push_record.
-        self.parent.input_field = record_info_out[record_info_out.get_field_num(self.parent.field_selection)]
 
         return True
 
@@ -194,34 +197,29 @@ class IncomingInterface:
         # Copy the data from the incoming record into the outgoing record.
         self.record_creator.reset()
         self.record_copier.copy(self.record_creator, in_record)
-##########
 
 
+        def FieldClean(data):
+            try:
+                data = json.loads(data)
+                return data
+            except:
+                return data
+                
+#		if self.parent.url.get_as_string(in_record) is not None:
+        request_method = self.parent.method.get_as_string(in_record)
+        request_url = self.parent.url.get_as_string(in_record)
+        request_header = FieldClean(self.parent.header.get_as_string(in_record))
+        request_body = FieldClean(self.parent.body.get_as_string(in_record))
+
+        r = requests.request(request_method,request_url,headers=request_header,data=request_body)
+        request_response = r.text
+        request_status = str(r.status_code)
 
 
-
-
-# read in the data
-input = Alteryx.read('#1')
-
-
-# Create MakeCall function to handle the combination of the status and response
-
-    r = requests.request(method,url,header,body)
-    response = r.text
-    status = str(r.status_code)
-    
-
-
-    
-  
-
-
-
-
-
-##############  
         #Write Outputs to correct Fields
+        self.parent.status.set_from_string(self.record_creator, request_status)
+        self.parent.response.set_from_string(self.record_creator, request_response)
         out_record = self.record_creator.finalize_record()
 
         # Push the record downstream and quit if there's a downstream error.
