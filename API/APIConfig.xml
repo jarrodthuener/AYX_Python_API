@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<AlteryxJavaScriptPlugin>
+  <EngineSettings EngineDll="Python" EngineDllEntryPoint="API_Engine.py" SDKVersion="10.1"/>
+  <Properties>
+    <MetaInfo>
+      <NameIsFileName value="True"/>
+      <Name>API</Name>
+      <Description>Python API</Description>
+      <RootToolName>API</RootToolName>
+      <ToolVersion>1</ToolVersion>
+      <ToolInDB value="false"/>
+      <CategoryName>Python</CategoryName>
+      <SearchTags>Python,API,Download</SearchTags>
+      <Author>Jarrod Thuener</Author>
+      <Company>ACE</Company>
+      <Copyright>2021</Copyright>
+      <DescriptionLink actual="" display=""/>
+    </MetaInfo>
+  </Properties>
+  <GuiSettings Help="" Html="APIGui.html" Icon="APIIcon.png" SDKVersion="10.1">
+    <InputConnections>
+      <Connection Name="Input" AllowMultiple="False" Optional="False" Type="Connection" Label="I"/>
+    </InputConnections>
+    <OutputConnections>
+      <Connection Name="Output" AllowMultiple="False" Optional="False" Type="Connection" Label="O"/>
+    </OutputConnections>
+  </GuiSettings>
+</AlteryxJavaScriptPlugin>

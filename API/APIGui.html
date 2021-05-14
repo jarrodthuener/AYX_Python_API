@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html style="padding:20px">
+<head>
+  <meta charset="utf-8">
+  <title>Article Summary</title>
+  <script type="text/javascript">
+    document.write('<link rel="import" href="' + window.Alteryx.LibDir + '2/lib/includes.html">');
+  </script>
+</head>
+<body>
+  <form>
+    <fieldset>
+      <legend class='blueTitle'>XMSG("Select API Fields")</legend>
+      <div class='leftCon'>
+        <label>XMSG("Method")</label>
+		<ayx data-ui-props = "{type: 'DropDown'}" data-item-props =
+			"{
+				dataName: 'Method',
+				dataType: 'FieldSelector',
+				anchorIndex:'0',
+				connectionIndex:'0'
+			}"
+		>	
+		</ayx>
+      </div>
+	    <label>XMSG("URL")</label>
+		<ayx data-ui-props = "{type: 'DropDown'}" data-item-props =
+			"{
+				dataName: 'URL',
+				dataType: 'FieldSelector',
+				anchorIndex:'0',
+				connectionIndex:'0'
+			}"
+		>
+		</ayx>
+      </div>
+	    <label>XMSG("Headers")</label>
+		<ayx data-ui-props = "{type: 'DropDown'}" data-item-props =
+		    "{
+				dataName: 'Headers',
+				dataType: 'FieldSelector',
+				anchorIndex:'0',
+				connectionIndex:'0'
+			}"
+		>
+		</ayx>
+      </div>
+	    <label>XMSG("Body")</label>
+		<ayx data-ui-props = "{type: 'DropDown'}" data-item-props =
+			"{
+				dataName: 'Body',
+				dataType: 'FieldSelector',
+				anchorIndex:'0',
+				connectionIndex:'0'
+			}"
+		>
+		</ayx>
+      </div>
+  </form>
+  
+	<script type="text/javascript">                     
+    Alteryx.Gui.BeforeLoad = (manager, AlteryxDataItems, json) => {
+    }
+    Alteryx.Gui.AfterLoad = (manager) => {
+    }
+  </script>
+ 
+</body>
+</html>

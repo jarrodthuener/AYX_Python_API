@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AlteryxJavaScriptPlugin>
+  <Properties>
+    <MetaInfo>
+      <Name>API</Name>
+      <Description>Python API</Description>
+      <ToolVersion>1</ToolVersion>
+      <CategoryName>Python</CategoryName>
+      <Author>Jarrod Thuener</Author>
+      <Icon>APIIcon.png</Icon>
+    </MetaInfo>
+  </Properties>
+</AlteryxJavaScriptPlugin>
