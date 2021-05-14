@@ -32,7 +32,7 @@ class AyxPlugin:
 
 #defines field type and sizes as a variable in downstream processes
         self.data_type = Sdk.FieldType.v_wstring
-        self.data_size = 20000
+        self.data_size = 1073741823
         self.URL = "URL"
         self.status = "Status"
         #self.data_type = Sdk.FieldType.v_wstring
